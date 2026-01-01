@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About – Smart Agriculture</title>
+
+    <!-- Bootstrap (optional, kept as requested) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --dark-green: #0A400C;
+            --primary-green: #2E7D32;
+            --light-green: #ECFAE5;
+            --soft-green: #F4FFF0;
+            --accent: #81C784;
+            --text-dark: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #f4fff0, #e8f5e9);
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+         
+      
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: radial-gradient(circle at top, #ffffff, #e9f7e4);
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 700;
+            color:#1a7b1d;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #2b5b2b;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        /* CONTENT */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            margin-bottom: 28px;
+        }
+
+        section h2 {
+            font-size: 26px;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        section p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* FEATURES */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+            margin-top: 16px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border-top: 5px solid var(--accent);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .card h5 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: #374151;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 26px 12px;
+            background: #f0f8ec;
+            color: #2f4f2f;
+            border-top: 1px solid #d6e9d0;
+            margin-top: 40px;
+        }
+
+        footer small {
+            font-size: 14px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 30px;
+            }
+            .nav {
+                gap: 14px;
+                padding: 0 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+   
+
+    <main>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>About Smart Agriculture</h1>
+        <p>
+            Modern solutions for farming — empowering farmers with AI-driven tools,
+            accurate weather insights, and intelligent crop guidance.
+        </p>
+    </section>
+
+    <!-- CONTENT -->
+    <div class="container">
+
+        <section>
+            <h2>Our Mission</h2>
+            <p>
+                Our mission is to empower farmers by integrating technology with agriculture.
+                We aim to improve crop productivity, reduce losses, and promote sustainable
+                farming practices through intelligent digital solutions.
+            </p>
+        </section>
+
+        <section>
+            <h2>What We Offer</h2>
+            <div class="features">
+
+                <div class="card">
+                    <h5>🌾 Crop Monitoring</h5>
+                    <p>
+                        Detect crop diseases early using image-based AI and receive
+                        actionable recommendations to protect yields.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h5>🤖 AI Analysis</h5>
+                    <p>
+                        AI-powered insights for plant health, fertilizer planning,
+                        and soil management.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h5>🌦 Weather Forecast</h5>
+                    <p>
+                        Reliable weather predictions and alerts to help plan
+                        irrigation, sowing, and harvesting.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h5>💬 Farmer Chat</h5>
+                    <p>
+                        A friendly agriculture chatbot answering questions on crops,
+                        soil health, diseases, and best practices.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>How It Works</h2>
+            <p>
+                Upload crop images using the Detect tool, view real-time weather data,
+                and interact with the chatbot for personalized farming guidance — all
+                from one easy-to-use platform.
+            </p>
+        </section>
+
+        <section>
+            <h2>Contact & Support</h2>
+            <p>
+                For feedback or support, please sign in using the Sign In page.
+                We’re continuously improving to better serve farmers and the
+                agricultural community.
+            </p>
+        </section>
+
+    </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <small>© <span id="year"></span> Smart Agriculture — Helping Farmers Grow Better 🌱</small>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>

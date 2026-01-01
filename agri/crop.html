@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crop & Disease Detector</title>
+
+  <style>
+    * {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url("imageDectBa.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;  
+  margin-bottom: 100px; 
+  /* min-width:500px; */
+      
+}
+
+
+.card {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  margin-top: 100px; 
+}
+
+
+h1 {
+  color: #1649a8;
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+
+.controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+input[type="file"] {
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.45);
+  cursor: pointer;
+  width: 220px;
+  min-width: 100px;
+}
+
+
+button {
+  padding: 10px 20px;
+  background: rgba(42, 77, 143, 0.85);
+  color: white;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(42, 77, 143, 0.35);
+}
+
+.preview-box {
+  max-width: 520px;
+  max-height: 360px;
+  margin: 18px auto;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+#previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.preview-box:hover #previewImage {
+  transform: scale(1.2);
+}
+
+
+#results {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+
+.result-card {
+  padding: 18px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(10px);
+  border-left: 6px solid #2a4d8f;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 720px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+
+.result-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #2a4d8f;
+  margin-bottom: 8px;
+}
+
+.result-item {
+  font-size: 16px;
+  margin: 6px 0;
+  color: #222;
+}
+
+.result-description {
+  background: rgba(255,255,255,0.55);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.7);
+  margin-top: 6px;
+  line-height: 1.6;
+  font-size: 15px;
+  color: #161616;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>🌱 Crop Detector 🌱</h1>
+
+    <div class="controls">
+      <input id="imageInput" type="file" accept="image/*">
+      <button id="analyzeBtn">Analyze</button>
+    </div>
+
+    <div class="preview-box">
+  <img id="previewImage">
+</div>
+    <div id="results"></div>
+  </div>
+
+  <script>
+    const API_KEY = "Ejok8TQCNUIYbOr0EHLTimIKImLF7dzSWOmHMKzkQM9kX84hGv";
+
+//ready made api  form plant.id for plant identificatiobn
+
+    const imageInput = document.getElementById("imageInput");
+    const analyzeBtn = document.getElementById("analyzeBtn");
+    const previewImage = document.getElementById("previewImage");
+    const resultsDiv = document.getElementById("results");
+  
+
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      console.log(reader);
+      
+      reader.onload = () => {
+        previewImage.src = reader.result;
+        previewImage.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+
+    });
+
+    analyzeBtn.addEventListener("click", () => {
+      const file = imageInput.files[0];
+      if (!file) {
+        alert("Please select an image");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const base64Image = reader.result.split(",")[1];
+        
+        const body = {
+          images: [base64Image],
+          health: "all"
+        };
+
+        const url = "https://plant.id/api/v3/identification?details=common_names,description";
+
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Api-Key": API_KEY
+          },
+          body: JSON.stringify(body)
+        });
+
+        const data = await response.json();
+// ?. help for safty acess
+        const suggestion = data?.result?.classification?.suggestions?.[0];
+        if (!suggestion) {
+          alert("No result found");
+          return;
+        }
+
+        const cropName = suggestion.details?.common_names?.[0] || "Not available";
+        const scientificName = suggestion.name || "Unknown";
+        const description = suggestion.details?.description?.value || "No description.";
+
+        resultsDiv.innerHTML = `
+          <div class="result-card">
+            <div class="result-title">${cropName}</div>
+            <p class="result-item"><strong>Scientific Name:</strong> ${scientificName}</p>
+            <p class="result-item"><strong>Description:</strong></p>
+            <div class="result-description">${description}</div>
+          </div>
+        `;
+      };
+
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
