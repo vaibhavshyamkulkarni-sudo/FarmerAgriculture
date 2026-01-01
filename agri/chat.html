@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #eef5ea; /* light green background */
+            background-color: #eef5ea; 
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -30,11 +30,10 @@
             border-top: 1px solid #d6e9d0;
         }
 
-        /* Chatbot Container */
         .chat-container {
             width: 100%;
-            max-width: 520px;     /* increased width */
-            height: 600px;        /* increased height */
+            max-width: 520px;     
+            height: 600px;       
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.15);
@@ -43,9 +42,9 @@
             overflow: hidden;
         }
 
-        /* Header */
+       
         .chat-header {
-            background-color: #2e7d32; /* agriculture green */
+            background-color: #2e7d32; 
             color: white;
             text-align: center;
             padding: 14px;
@@ -53,7 +52,7 @@
             font-weight: bold;
         }
 
-        /* Chat messages */
+        
         .chat-box {
             flex: 1;
             padding: 16px;
@@ -61,11 +60,11 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            background-color: #f7fbf5; /* soft farm-like tone */
+            background-color: #f7fbf5; 
         }
 
         .bot-message {
-            background-color: #dcedc8; /* light green */
+            background-color: #dcedc8; 
             padding: 10px 14px;
             border-radius: 10px;
             width: fit-content;
@@ -73,7 +72,7 @@
         }
 
         .user-message {
-            background-color: #4caf50; /* darker green */
+            background-color: #4caf50; 
             color: white;
             padding: 10px 14px;
             border-radius: 10px;
@@ -82,7 +81,6 @@
             align-self: flex-end;
         }
 
-        /* Input area */
         .chat-input {
             display: flex;
             border-top: 1px solid #c8e6c9;
@@ -153,7 +151,7 @@
 
             const chatBox = document.getElementById("chatBox");
 
-            // User message
+           
             const userMsg = document.createElement("div");
             userMsg.className = "user-message";
             userMsg.textContent = message;
@@ -161,7 +159,6 @@
 
             input.value = "";
 
-            // Bot response
             setTimeout(() => {
                 const botMsg = document.createElement("div");
                 botMsg.className = "bot-message";

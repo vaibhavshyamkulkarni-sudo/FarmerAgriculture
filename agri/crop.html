@@ -23,7 +23,7 @@ body {
   justify-content: center;
   align-items: flex-start;  
   margin-bottom: 100px; 
-  /* min-width:500px; */
+ 
       
 }
 
@@ -169,7 +169,6 @@ button:hover {
   <script>
     const API_KEY = "Ejok8TQCNUIYbOr0EHLTimIKImLF7dzSWOmHMKzkQM9kX84hGv";
 
-//ready made api  form plant.id for plant identificatiobn
 
     const imageInput = document.getElementById("imageInput");
     const analyzeBtn = document.getElementById("analyzeBtn");
@@ -220,7 +219,7 @@ button:hover {
         });
 
         const data = await response.json();
-// ?. help for safty acess
+
         const suggestion = data?.result?.classification?.suggestions?.[0];
         if (!suggestion) {
           alert("No result found");
